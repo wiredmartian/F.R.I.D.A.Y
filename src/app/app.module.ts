@@ -8,27 +8,54 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AuthProvider } from '../providers/auth/auth';
+
+import { HttpModule } from '@angular/http';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import * as firebase from 'firebase';
+import { SigninPage } from '../pages/signin/signin';
+import { TaskProvider } from '../providers/task/task';
+import { CreateTaskPage } from '../pages/create-task/create-task';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { TasksPage } from '../pages/tasks/tasks';
+
+
+firebase.initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    SigninPage,
+    CreateTaskPage,
+    TasksPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    HttpModule,
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    SigninPage,
+    CreateTaskPage,
+    TasksPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider,
+    TaskProvider,
   ]
 })
 export class AppModule {}

@@ -20,4 +20,7 @@
   <div *ngIf="selectedItem" padding>
     You navigated here from <b>{{selectedItem.title}}</b>
   </div>
+  <div padding>
+    <button ion-button (click)="viewAddTask()">Add Task</button>
+  </div>
 </ion-content>

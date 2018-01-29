@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { CreateTaskPage } from '../create-task/create-task';
 
 @Component({
   selector: 'page-list',
@@ -33,5 +34,8 @@ export class ListPage {
     this.navCtrl.push(ListPage, {
       item: item
     });
+  }
+  viewAddTask(){
+    this.navCtrl.push(CreateTaskPage);
   }
 }
