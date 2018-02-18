@@ -4,13 +4,8 @@ import { User } from '../../models/user';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ListPage } from '../list/list';
 import { TasksPage } from '../tasks/tasks';
-
-/**
- * Generated class for the SigninPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { DatabaseProvider } from '../../providers/database/database';
+import { CreateTaskPage } from '../create-task/create-task';
 
 @IonicPage()
 @Component({
@@ -21,14 +16,19 @@ export class SigninPage {
   data = {} as User;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public auth: AuthProvider) {
+    public auth: AuthProvider,
+    private db: DatabaseProvider) {
+      
   }
 
   signIn(){
     this.auth.onSignIn(this.data).then(res =>{
       if(!res.code){
-        console.log(this.auth.onGetUid());
-        this.navCtrl.setRoot(ListPage);
+        let exists = this.db.getDBUser();
+        if(!exists){
+          this.db.insertUser(res);
+        }
+        this.navCtrl.setRoot(CreateTaskPage);
       }
     }).catch((err) =>{
       console.log(err);

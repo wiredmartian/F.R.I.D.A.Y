@@ -4,13 +4,6 @@ import { TaskProvider } from '../../providers/task/task';
 import { Task } from '../../models/task';
 import { Observable } from 'rxjs/Observable';
 
-/**
- * Generated class for the TasksPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-tasks',

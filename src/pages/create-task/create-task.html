@@ -16,7 +16,7 @@
 <ion-content padding>
     <ion-item>
       <ion-label stacked>Short task title?</ion-label>
-      <ion-input type="text" [(ngModel)]="task.title" name="title"></ion-input>
+      <ion-input type="text" [(ngModel)]="task.title" name="title" aria-required="true"></ion-input>
     </ion-item>
   
     <ion-item>
@@ -25,17 +25,17 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>What type of task is this?</ion-label>
+      <ion-label stacked>What type of task is this?</ion-label>
       <ion-input type="text" [(ngModel)]="task.type" name="type"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>When will you start?</ion-label>
+      <ion-label stacked>When will you start?</ion-label>
       <ion-input type="text" [(ngModel)]="task.start" name="start"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>When do you plan to complete it?</ion-label>
+      <ion-label stacked>When do you plan to complete it?</ion-label>
       <ion-input type="text" [(ngModel)]="task.complete" name="complete"></ion-input>
     </ion-item>
     <button ion-button full (click)="addTask()">Add Task</button>

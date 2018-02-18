@@ -4,26 +4,29 @@ import { Task } from '../../models/task';
 import { AuthProvider } from '../auth/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { DatabaseProvider } from '../database/database';
 
-/*
-  Generated class for the TaskProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class TaskProvider {
   uid : string = '';
 
   constructor(public http: Http, 
     public auth: AuthProvider,
-    public firedb: AngularFireDatabase) {
+    public firedb: AngularFireDatabase,
+    private db: DatabaseProvider) {
     this.uid = auth.onGetUid();
   }
 
   createTask(task: Task){
     let uid = this.auth.onGetUid();
-    return firebase.database().ref().child(`/tasks/${uid}`).push(task);
+    task.uid = uid;
+    task.isdone = false;
+    return firebase.database().ref().child(`/tasks/${uid}`).push(task)
+    .then(() =>{
+      this.db.addTask(task);
+    }, err =>{
+      console.log('rejected');
+    })
   }
   getTasks(){
     return this.firedb.list(`/tasks/${this.uid}`).valueChanges();

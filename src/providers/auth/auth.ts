@@ -72,4 +72,8 @@ export class AuthProvider {
       console.log(err);
     })
   }
+
+  saveUser(user: User){
+
+  }
 }

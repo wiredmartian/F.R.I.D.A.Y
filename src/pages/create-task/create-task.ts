@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 import { TaskProvider } from '../../providers/task/task';
 import { Task } from '../../models/task';
 import { TasksPage } from '../tasks/tasks';
@@ -16,18 +16,19 @@ export class CreateTaskPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    private toastCtrl: ToastController,
     public taskProv: TaskProvider,
     private dataProv: DatabaseProvider) {
       this.dataProv.getDatabaseState().subscribe(rdy =>{
         if(rdy){
-          console.log('localdb ready');
+          this.loadSQLiteTasks();
         }
-      })
+      },error =>{
 
-      this.loadFirebaseTasks();
+      })
   }
 
-  loadUserTasks(){
+  loadSQLiteTasks(){
     this.dataProv.getTasks().then(data =>{
       this.tasks = data;
     });
@@ -38,6 +39,7 @@ export class CreateTaskPage {
       this.tasks = res;
     })
   }
+
   addTask(){
     this.taskProv.createTask(this.task)
     .then(res =>{
@@ -50,5 +52,13 @@ export class CreateTaskPage {
     }, err =>{
       console.log('rejected');
     })
+  }
+
+  toastMessage(msg: string){
+    this.toastCtrl.create({
+      message: msg,
+      position: 'bottom',
+      duration: 3000
+    }).present();
   }
 }
