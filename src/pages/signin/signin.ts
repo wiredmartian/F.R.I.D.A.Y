@@ -24,11 +24,12 @@ export class SigninPage {
   signIn(){
     this.auth.onSignIn(this.data).then(res =>{
       if(!res.code){
-        let exists = this.db.getDBUser();
-        if(!exists){
-          this.db.insertUser(res);
-        }
-        this.navCtrl.setRoot(CreateTaskPage);
+        this.db.getDBUser().then(exists =>{
+          if(!exists){
+            this.db.insertUser(res);
+          }
+          this.navCtrl.push(CreateTaskPage);
+        })
       }
     }).catch((err) =>{
       console.log(err);

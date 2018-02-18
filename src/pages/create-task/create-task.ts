@@ -29,17 +29,17 @@ export class CreateTaskPage {
   }
 
   loadSQLiteTasks(){
-    this.tasks = this.dataProv.getTasks();
-    this.toastMessage(this.tasks.length + ' records fetched');
-    
-    /*this.dataProv.getTasks().then(data =>{
-      this.tasks = data;
-      this.toastMessage('data return' + data);
-    });*/
+    this.dataProv.getTasks().then(res =>{
+      this.tasks = res;
+      this.toastMessage('hit sql ' + res.length)
+    }, error =>{
+      this.toastMessage('rejected');
+    })
   }
 
   loadFirebaseTasks(){
     this.taskProv.getTasks().subscribe(res =>{
+      this.toastMessage('loading from firebase...');
       this.tasks = res;
     })
   }
@@ -47,12 +47,12 @@ export class CreateTaskPage {
   addTask(){
     this.taskProv.createTask(this.task)
     .then(res =>{
+      this.tasks.push(this.task);
       this.task.title = '';
       this.task.type = '';
       this.task.description = '';
       this.task.complete = '';
       this.task.start = '';
-      console.log('new task pushed');
     }, err =>{
       console.log('rejected');
     })

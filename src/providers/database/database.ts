@@ -51,31 +51,29 @@ export class DatabaseProvider {
     })
   }
 
-  getTasks() : Task[]{
-    let query = "SELECT * FROM tasks";
-    this.database.executeSql(query,[]).then(res =>{
+  getTasks(){
+    return this.database.executeSql('SELECT * FROM tasks',[]).then(res =>{
+      let devtasks = [];
       if(res.rows.length > 0){
         this.toastMessage('fetching records...');
         for(var i = 0; i < res.rows.length; i++){
           let task = {
-            'uid': res.rows.item(i).uid,
-            'title': res.rows.item(i).title,
-            'description': res.rows.item(i).description,
-            'start': res.rows.item(i).start,
-            'complete': res.rows.item(i).complete,
-            'isdone': res.rows.item(i).isdone,
-            'type': res.rows.item(i).type,
+            uid: res.rows.item(i).uid,
+            title: res.rows.item(i).title,
+            description: res.rows.item(i).description,
+            start: res.rows.item(i).start,
+            complete: res.rows.item(i).complete,
+            isdone: res.rows.item(i).isdone,
+            type: res.rows.item(i).type,
           }
-          this.toastMessage(task.title);
-          this.tasks.push(task);
+          devtasks.push(task);
         }
       }
-      return this.tasks;
+      return devtasks;
     }, err =>{
       this.toastMessage('failed to get db tasks');
       return [];
     })
-    return this.tasks;
   }
 
   initDB(){
@@ -103,9 +101,9 @@ export class DatabaseProvider {
     })
   }
 
-  getDBUser() : boolean{
+  getDBUser(){
     let query = 'SELECT * FROM developer';
-    this.database.executeSql(query,[])
+    return this.database.executeSql(query,[])
     .then(res => {
       if(res.rows.length > 0){
         this.toastMessage('user exists');
@@ -113,8 +111,8 @@ export class DatabaseProvider {
       }
     }, err =>{
       this.toastMessage('unable to find user');
+      return false;
     });
-    return false;
   }
 
   toastMessage(msg: string){
