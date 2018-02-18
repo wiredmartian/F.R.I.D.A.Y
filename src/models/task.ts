@@ -1,11 +1,11 @@
 export interface Task{
+    uid: string;
     title: string;
     description: string;
     start: any;
     complete: any;
     isdone: boolean;
     type: string;
-    uid: string;
 }
 export interface Meeting{
     title: string;

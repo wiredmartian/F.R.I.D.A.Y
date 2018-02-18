@@ -5,7 +5,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { IonicStorageModule } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,6 +21,7 @@ import { CreateTaskPage } from '../pages/create-task/create-task';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { TasksPage } from '../pages/tasks/tasks';
 import { DatabaseProvider } from '../providers/database/database';
+import { SQLite } from '@ionic-native/sqlite';
 
 
 firebase.initializeApp(environment.firebase);
@@ -39,7 +39,6 @@ firebase.initializeApp(environment.firebase);
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    IonicStorageModule.forRoot(),
     AngularFireDatabaseModule,
     HttpModule,
     IonicModule.forRoot(MyApp)
@@ -59,6 +58,7 @@ firebase.initializeApp(environment.firebase);
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     TaskProvider,
+    SQLite,
     DatabaseProvider,
   ]
 })

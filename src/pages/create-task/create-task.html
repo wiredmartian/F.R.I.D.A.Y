@@ -14,25 +14,36 @@
 
 
 <ion-content padding>
-  <ion-list>
-
     <ion-item>
-      <ion-label floating>Title</ion-label>
+      <ion-label stacked>Short task title?</ion-label>
       <ion-input type="text" [(ngModel)]="task.title" name="title"></ion-input>
     </ion-item>
   
     <ion-item>
-      <ion-label floating>Description</ion-label>
+      <ion-label stacked>What will you be doing?</ion-label>
       <ion-input [(ngModel)]="task.description" name="description"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Type</ion-label>
+      <ion-label floating>What type of task is this?</ion-label>
       <ion-input type="text" [(ngModel)]="task.type" name="type"></ion-input>
     </ion-item>
-  
-  </ion-list>
-  <div padding>
-    <button ion-button (click)="createTask()">Add</button>
-  </div>
+
+    <ion-item>
+      <ion-label floating>When will you start?</ion-label>
+      <ion-input type="text" [(ngModel)]="task.start" name="start"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>When do you plan to complete it?</ion-label>
+      <ion-input type="text" [(ngModel)]="task.complete" name="complete"></ion-input>
+    </ion-item>
+    <button ion-button full (click)="addTask()">Add Task</button>
+
+    <ion-list>
+      <ion-item *ngFor="let item of tasks">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
+      </ion-item>
+    </ion-list>
 </ion-content>

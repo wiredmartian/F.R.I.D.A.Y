@@ -28,7 +28,7 @@ export class SigninPage {
     this.auth.onSignIn(this.data).then(res =>{
       if(!res.code){
         console.log(this.auth.onGetUid());
-        this.navCtrl.setRoot(TasksPage);
+        this.navCtrl.setRoot(ListPage);
       }
     }).catch((err) =>{
       console.log(err);

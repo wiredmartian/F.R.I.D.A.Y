@@ -3,13 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TaskProvider } from '../../providers/task/task';
 import { Task } from '../../models/task';
 import { TasksPage } from '../tasks/tasks';
-
-/**
- * Generated class for the CreateTaskPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { DatabaseProvider } from '../../providers/database/database';
 
 @IonicPage()
 @Component({
@@ -18,17 +12,43 @@ import { TasksPage } from '../tasks/tasks';
 })
 export class CreateTaskPage {
   task = {} as Task
+  tasks : any[];
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public taskProv: TaskProvider) {
+    public taskProv: TaskProvider,
+    private dataProv: DatabaseProvider) {
+      this.dataProv.getDatabaseState().subscribe(rdy =>{
+        if(rdy){
+          console.log('localdb ready');
+        }
+      })
+
+      this.loadFirebaseTasks();
   }
 
-  createTask(){
-    this.taskProv.createTask(this.task).then(()=>{
-      this.navCtrl.push(TasksPage);
-    },(err)=>{
-      console.log(err);
+  loadUserTasks(){
+    this.dataProv.getTasks().then(data =>{
+      this.tasks = data;
+    });
+  }
+
+  loadFirebaseTasks(){
+    this.taskProv.getTasks().subscribe(res =>{
+      this.tasks = res;
+    })
+  }
+  addTask(){
+    this.taskProv.createTask(this.task)
+    .then(res =>{
+      this.task.title = '';
+      this.task.type = '';
+      this.task.description = '';
+      this.task.complete = '';
+      this.task.start = '';
+      console.log('new task pushed');
+    }, err =>{
+      console.log('rejected');
     })
   }
 }
