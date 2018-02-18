@@ -51,11 +51,11 @@ export class DatabaseProvider {
     })
   }
 
-  getTasks(){
+  getTasks() : Task[]{
     let query = "SELECT * FROM tasks";
-    return this.database.executeSql(query,[]).then(res =>{
+    this.database.executeSql(query,[]).then(res =>{
       if(res.rows.length > 0){
-        this.toastMessage('fetching recordes...');
+        this.toastMessage('fetching records...');
         for(var i = 0; i < res.rows.length; i++){
           let task = {
             'uid': res.rows.item(i).uid,
@@ -66,6 +66,7 @@ export class DatabaseProvider {
             'isdone': res.rows.item(i).isdone,
             'type': res.rows.item(i).type,
           }
+          this.toastMessage(task.title);
           this.tasks.push(task);
         }
       }
@@ -74,6 +75,7 @@ export class DatabaseProvider {
       this.toastMessage('failed to get db tasks');
       return [];
     })
+    return this.tasks;
   }
 
   initDB(){

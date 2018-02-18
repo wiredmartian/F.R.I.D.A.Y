@@ -24,14 +24,18 @@ export class CreateTaskPage {
           this.loadSQLiteTasks();
         }
       },error =>{
-
+        this.toastMessage('ready state error');
       })
   }
 
   loadSQLiteTasks(){
-    this.dataProv.getTasks().then(data =>{
+    this.tasks = this.dataProv.getTasks();
+    this.toastMessage(this.tasks.length + ' records fetched');
+    
+    /*this.dataProv.getTasks().then(data =>{
       this.tasks = data;
-    });
+      this.toastMessage('data return' + data);
+    });*/
   }
 
   loadFirebaseTasks(){
