@@ -23,7 +23,7 @@ export class TaskProvider {
     task.isdone = false;
     return firebase.database().ref().child(`/tasks/${uid}`).push(task)
     .then(() =>{
-      this.db.addTask(task);
+      //this.db.addTask(task);
     }, err =>{
       console.log('rejected');
     })

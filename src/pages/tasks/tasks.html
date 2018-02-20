@@ -6,7 +6,12 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
+    <ion-buttons end (click)="addTask()">
+      <button ion-button icon-only>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Tasks</ion-title>
   </ion-navbar>
 
@@ -15,12 +20,9 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let task of tasks">
-      <ion-icon name="bug" item-start></ion-icon>
-      {{task.title}}
-      <div class="item-note" item-end>
-        {{task.type}}
-      </div>
+    <button ion-item *ngFor="let task of tasks" (click)="viewTask(task)">
+      <h2>{{ task.title }}</h2>
+      <p>{{ task.description }}</p>
     </button>
   </ion-list>
 </ion-content>

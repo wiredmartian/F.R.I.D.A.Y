@@ -1,0 +1,48 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{task?.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item>
+        <h2>{{task.title}}</h2>
+      </ion-item>
+      
+      <ion-item>
+        Start
+        <ion-note item-end>
+          {{task.start}}
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Completion
+        <ion-note item-end>
+          {{task.complete}}
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Type
+        <ion-note item-end>
+          {{task.type}}
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        User
+        <ion-note item-end>
+          {{task.uid}}
+        </ion-note>
+      </ion-item>
+      <p padding>
+        {{ task.description }}
+      </p>
+</ion-content>

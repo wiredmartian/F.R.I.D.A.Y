@@ -22,6 +22,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { TasksPage } from '../pages/tasks/tasks';
 import { DatabaseProvider } from '../providers/database/database';
 import { SQLite } from '@ionic-native/sqlite';
+import { TaskDetailsPage } from '../pages/task-details/task-details';
 
 
 firebase.initializeApp(environment.firebase);
@@ -33,7 +34,8 @@ firebase.initializeApp(environment.firebase);
     ListPage,
     SigninPage,
     CreateTaskPage,
-    TasksPage
+    TasksPage,
+    TaskDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ firebase.initializeApp(environment.firebase);
     ListPage,
     SigninPage,
     CreateTaskPage,
-    TasksPage
+    TasksPage,
+    TaskDetailsPage
   ],
   providers: [
     StatusBar,

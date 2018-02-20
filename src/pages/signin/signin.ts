@@ -17,20 +17,19 @@ export class SigninPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public auth: AuthProvider,
-    private db: DatabaseProvider) {
+    /*private db: DatabaseProvider*/) {
       
   }
 
   signIn(){
     this.auth.onSignIn(this.data).then(res =>{
       if(!res.code){
-        this.db.getDBUser().then(exists =>{
+        /*this.db.getDBUser().then(exists =>{
           if(!exists){
             this.db.insertUser(res);
-          }
-          this.navCtrl.push(CreateTaskPage);
-        })
-      }
+          } */
+          this.navCtrl.setRoot(TasksPage);
+        }
     }).catch((err) =>{
       console.log(err);
     })
