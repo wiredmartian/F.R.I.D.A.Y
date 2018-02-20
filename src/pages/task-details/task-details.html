@@ -13,8 +13,44 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-item>
+<ion-content class="cards-bg">
+    <ion-card>
+        <img src="assets/imgs/{{task.type}}.png"/>
+        <ion-card-content>
+          <ion-card-title>
+            {{task.title}}
+            </ion-card-title>
+          <p>
+            {{task.description}}
+            <br><br>
+
+            You've logged a {{task.type }} item titled {{task.title}} set to start {{task.start}} and be 
+            complete by {{task.complete}}
+          </p>
+        </ion-card-content>
+
+        <ion-row no-padding>
+            <ion-col>
+              <button ion-button clear small color="danger" icon-start>
+                <ion-icon name='checkmark-circle-outline'></ion-icon>
+                Done
+              </button>
+            </ion-col>
+            <ion-col text-center>
+              <button ion-button clear small color="danger" icon-start>
+                <ion-icon name='create'></ion-icon>
+                Edit
+              </button>
+            </ion-col>
+            <ion-col text-right>
+              <button ion-button clear small color="danger" icon-start>
+                <ion-icon name='close-circle'></ion-icon>
+                Remove
+              </button>
+            </ion-col>
+          </ion-row>
+      </ion-card>
+    <!--<ion-item>
         <h2>{{task.title}}</h2>
       </ion-item>
       
@@ -44,5 +80,5 @@
       </ion-item>
       <p padding>
         {{ task.description }}
-      </p>
+      </p>-->
 </ion-content>
