@@ -14,12 +14,12 @@
       <ion-label stacked>What will you be doing?</ion-label>
       <ion-input [(ngModel)]="task.description" name="description"></ion-input>
     </ion-item>
-
+<!--
     <ion-item>
       <ion-label stacked>What type of task is this?</ion-label>
       <ion-input type="text" [(ngModel)]="task.type" name="type"></ion-input>
     </ion-item>
-
+  -->
     <ion-item>
       <ion-label stacked>When will you start?</ion-label>
       <ion-input type="text" [(ngModel)]="task.start" name="start"></ion-input>
@@ -29,5 +29,18 @@
       <ion-label stacked>When do you plan to complete it?</ion-label>
       <ion-input type="text" [(ngModel)]="task.complete" name="complete"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Nature of activity</ion-label>
+      <ion-select[(ngModel)]="task.type" name="type">
+        <ion-option value="coding">Coding</ion-option>
+        <ion-option value="event">Event</ion-option>
+        <ion-option value="entertainment">Entertainment</ion-option>
+        <ion-option value="work">Work</ion-option>
+        <ion-option value="music">Music</ion-option>
+        <ion-option value="social">Social</ion-option>
+        <ion-option value="fun">Fun</ion-option>
+      </ion-select>
+  </ion-item>
     <button ion-button full (click)="addTask()">Add Task</button>
 </ion-content>

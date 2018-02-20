@@ -9,6 +9,7 @@ import { DatabaseProvider } from '../database/database';
 @Injectable()
 export class TaskProvider {
   uid : string = '';
+  ref : firebase.database.Reference = firebase.database().ref();
 
   constructor(public http: Http, 
     public auth: AuthProvider,
@@ -19,16 +20,26 @@ export class TaskProvider {
 
   createTask(task: Task){
     let uid = this.auth.onGetUid();
-    task.uid = uid;
     task.isdone = false;
-    return firebase.database().ref().child(`/tasks/${uid}`).push(task)
-    .then(() =>{
-      //this.db.addTask(task);
-    }, err =>{
-      console.log('rejected');
-    })
+    let key = this.ref.child(`/tasks/${uid}`).push(task).key;
+    task.taskid = key;
+    return this.ref.child(`/tasks/${uid}/${key}`)
+    .update(task);
   }
   getTasks(){
     return this.firedb.list(`/tasks/${this.uid}`).valueChanges();
+  }
+
+  removeTask(taskId){
+    this.ref.child(`/tasks/${this.uid}/${taskId}`)
+    .remove().then(res =>{
+      console.log('removed');
+    }, error =>{
+      console.log('failed to remove');
+    })
+  }
+
+  getTaskById(taskId){
+    return this.ref.child(`/tasks/${this.uid}/${taskId}`);
   }
 }

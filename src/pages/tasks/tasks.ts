@@ -12,6 +12,7 @@ import { TaskDetailsPage } from '../task-details/task-details';
 })
 export class TasksPage {
   tasks: any[];
+  icon: string = 'assets/imgs/';
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public taskProv: TaskProvider,
@@ -20,7 +21,12 @@ export class TasksPage {
 
   ionViewDidLoad() {
     this.taskProv.getTasks().subscribe(res =>{
-      this.tasks = res
+      this.tasks = res;
+      /*let item = this.taskProv.getTaskById('-L5eGb8yoXZoFeqQxR7r')
+      .once('value').then(snapshot =>{
+        console.log(snapshot.val());
+      })*/
+      //console.log(item);
     },(err) =>{
       console.log(err);
     })
