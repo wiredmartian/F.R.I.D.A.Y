@@ -43,7 +43,7 @@
               </button>
             </ion-col>
             <ion-col text-right>
-              <button ion-button clear small color="danger" icon-start>
+              <button ion-button clear small color="danger" icon-start (click)="deleteTask(task.taskid)">
                 <ion-icon name='close-circle'></ion-icon>
                 Remove
               </button>

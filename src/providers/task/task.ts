@@ -4,7 +4,6 @@ import { Task } from '../../models/task';
 import { AuthProvider } from '../auth/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
-import { DatabaseProvider } from '../database/database';
 
 @Injectable()
 export class TaskProvider {
@@ -13,8 +12,7 @@ export class TaskProvider {
 
   constructor(public http: Http, 
     public auth: AuthProvider,
-    public firedb: AngularFireDatabase,
-    private db: DatabaseProvider) {
+    public firedb: AngularFireDatabase) {
     this.uid = auth.onGetUid();
   }
 
@@ -31,12 +29,7 @@ export class TaskProvider {
   }
 
   removeTask(taskId){
-    this.ref.child(`/tasks/${this.uid}/${taskId}`)
-    .remove().then(res =>{
-      console.log('removed');
-    }, error =>{
-      console.log('failed to remove');
-    })
+    return this.ref.child(`/tasks/${this.uid}/${taskId}`).remove();
   }
 
   getTaskById(taskId){

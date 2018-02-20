@@ -28,7 +28,7 @@ export class DatabaseProvider {
           this.toastMessage('db created');
 
         }, err =>{
-          this.toastMessage('db init rejected');
+          //this.toastMessage('db init rejected');
         })
         .catch((err) => {
           this.toastMessage('error occured while creating db');
