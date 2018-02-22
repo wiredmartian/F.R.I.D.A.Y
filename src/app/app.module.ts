@@ -25,6 +25,7 @@ import { DatabaseProvider } from '../providers/database/database';
 import { SQLite } from '@ionic-native/sqlite';
 import { TaskDetailsPage } from '../pages/task-details/task-details';
 import { SpeechProvider } from '../providers/speech/speech';
+import { UserfeedbackProvider } from '../providers/userfeedback/userfeedback';
 
 
 firebase.initializeApp(environment.firebase);
@@ -84,7 +85,8 @@ firebase.firestore().enablePersistence()
     SQLite,
     DatabaseProvider,
     TextToSpeech,
-    SpeechProvider
+    SpeechProvider,
+    UserfeedbackProvider
   ]
 })
 export class AppModule {}

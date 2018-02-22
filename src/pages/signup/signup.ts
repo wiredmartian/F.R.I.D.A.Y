@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { User } from '../../models/user';
-import { ListPage } from '../list/list';
 import { SigninPage } from '../signin/signin';
 import { TasksPage } from '../tasks/tasks';
 import { SpeechProvider } from '../../providers/speech/speech';
+import { UserfeedbackProvider } from '../../providers/userfeedback/userfeedback';
 
 
 @IonicPage()
@@ -17,30 +17,34 @@ export class SignupPage {
   data = {} as User;
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams,
     public auth: AuthProvider,
-    private speech: SpeechProvider) {
+    private speech: SpeechProvider,
+    private feeback: UserfeedbackProvider) {
       
   }
 
-  ionViewDidEnter(){
-    this.speech.speakMessage('Please sign up or sign in to continue to your todo list');
-  }
   signUp(){
-    this.auth.onSignUp(this.data).then((res) =>{
-      if(!res.code){
-        console.log(res);
-        this.navCtrl.setRoot(ListPage);
-      }
-    }).catch((err) =>{
-      this.speech.speakMessage('Registration failed');
-      console.log(err);
-    })
+    if(!this.validateCredentials()){
+      return;
+    }
+    this.feeback.presentLoading();
+    this.auth.onSignUp(this.data)
+    .then(() =>{
+        this.feeback.dismissLoading();
+        this.navCtrl.setRoot(TasksPage);
+    }, () =>{
+      this.feeback.dismissLoading();
+      this.feeback.toastMessage('Registration failed. Check your inputs and try again');
+    });
   }
 
   viewSignIn(){
     this.navCtrl.push(SigninPage);
   }
 
-
+  validateCredentials(){
+    if(this.data.password == '' || this.data.email == ''){
+      return false;
+    }
+  }
 }
