@@ -4,6 +4,8 @@ import { TaskProvider } from '../../providers/task/task';
 import { Task } from '../../models/task';
 import { CreateTaskPage } from '../create-task/create-task';
 import { TaskDetailsPage } from '../task-details/task-details';
+import { SpeechProvider } from '../../providers/speech/speech';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -16,7 +18,17 @@ export class TasksPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public taskProv: TaskProvider,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private speech: SpeechProvider,
+    private auth: AuthProvider) {
+      this.auth.fireState()
+      .on('value', snap =>{
+        if(snap.val() === true){
+          this.speech.speakMessage("Welcome, Wired Martian");
+        } else {
+          this.speech.speakMessage("You're offline. Your list will sync when your connection is available");
+        }
+      })
   }
 
   ionViewDidLoad() {

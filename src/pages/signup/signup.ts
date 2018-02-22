@@ -5,13 +5,8 @@ import { User } from '../../models/user';
 import { ListPage } from '../list/list';
 import { SigninPage } from '../signin/signin';
 import { TasksPage } from '../tasks/tasks';
+import { SpeechProvider } from '../../providers/speech/speech';
 
-/**
- * Generated class for the SignupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -23,10 +18,14 @@ export class SignupPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public auth: AuthProvider) {
-      //this.navCtrl.setRoot(TasksPage);
+    public auth: AuthProvider,
+    private speech: SpeechProvider) {
+      
   }
 
+  ionViewDidEnter(){
+    this.speech.speakMessage('Please sign up or sign in to continue to your todo list');
+  }
   signUp(){
     this.auth.onSignUp(this.data).then((res) =>{
       if(!res.code){
@@ -34,6 +33,7 @@ export class SignupPage {
         this.navCtrl.setRoot(ListPage);
       }
     }).catch((err) =>{
+      this.speech.speakMessage('Registration failed');
       console.log(err);
     })
   }

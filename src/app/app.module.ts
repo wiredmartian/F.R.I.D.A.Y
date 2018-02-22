@@ -15,7 +15,7 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase';
-//import 'firebase/firestore';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { SigninPage } from '../pages/signin/signin';
 import { TaskProvider } from '../providers/task/task';
 import { CreateTaskPage } from '../pages/create-task/create-task';
@@ -24,6 +24,7 @@ import { TasksPage } from '../pages/tasks/tasks';
 import { DatabaseProvider } from '../providers/database/database';
 import { SQLite } from '@ionic-native/sqlite';
 import { TaskDetailsPage } from '../pages/task-details/task-details';
+import { SpeechProvider } from '../providers/speech/speech';
 
 
 firebase.initializeApp(environment.firebase);
@@ -82,6 +83,8 @@ firebase.firestore().enablePersistence()
     TaskProvider,
     SQLite,
     DatabaseProvider,
+    TextToSpeech,
+    SpeechProvider
   ]
 })
 export class AppModule {}

@@ -73,10 +73,16 @@ export class AuthProvider {
       connectedRef.on('value', snapshot =>{
         if(snapshot.val() === true){
           this.toastMessage('database online');
+          return true;
         } else {
           this.toastMessage('database offline');
+          return false;
         }
       });
+  }
+
+  fireState(){
+    return firebase.database().ref(".info/connected");
   }
 
   toastMessage(message: string){
