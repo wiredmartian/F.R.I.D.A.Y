@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import * as firebase from 'firebase';
+import { TasksPage } from '../pages/tasks/tasks';
 
 
 @Component({
@@ -33,7 +35,9 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.hideSplashScreen();
+      //this.splashScreen.hide();
+      this.fireAuthStateChange();
     });
   }
 
@@ -42,4 +46,22 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  fireAuthStateChange(){
+    firebase.auth().onAuthStateChanged(user =>{
+      if(user){
+        this.nav.setRoot(TasksPage);
+      } else {
+        /** The app's init page is SignUp */
+      }
+    })
+  }
+
+  hideSplashScreen() {
+    if (this.splashScreen) {
+        setTimeout(() => {
+            this.splashScreen.hide();
+        }, 100);
+    }
+}
 }

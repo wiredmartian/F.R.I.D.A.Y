@@ -4,6 +4,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { User } from '../../models/user';
 import { ListPage } from '../list/list';
 import { SigninPage } from '../signin/signin';
+import { TasksPage } from '../tasks/tasks';
 
 /**
  * Generated class for the SignupPage page.
@@ -23,6 +24,7 @@ export class SignupPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public auth: AuthProvider) {
+      //this.navCtrl.setRoot(TasksPage);
   }
 
   signUp(){

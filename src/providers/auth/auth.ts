@@ -2,18 +2,13 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ToastController } from 'ionic-angular';
 
-/*
-  Generated class for the AuthProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthProvider {
 
-  constructor(public auth: AngularFireAuth) {
-    console.log('Hello AuthProvider Provider');
+  constructor(public auth: AngularFireAuth, private toastCtrl: ToastController) {
+    this.dbConnectionSate();
   }
 
   onSignUp(user: User): Promise<any>{
@@ -73,7 +68,22 @@ export class AuthProvider {
     })
   }
 
-  saveUser(user: User){
+  dbConnectionSate(){
+    let connectedRef = firebase.database().ref(".info/connected");
+      connectedRef.on('value', snapshot =>{
+        if(snapshot.val() === true){
+          this.toastMessage('database online');
+        } else {
+          this.toastMessage('database offline');
+        }
+      });
+  }
 
+  toastMessage(message: string){
+    this.toastCtrl.create({
+      message: message,
+      duration: 5000,
+      position: "bottom"
+    }).present();
   }
 }

@@ -12,7 +12,7 @@ import { TaskDetailsPage } from '../task-details/task-details';
 })
 export class TasksPage {
   tasks: any[];
-  icon: string = 'assets/imgs/';
+  icon: string = 'assets/img/';
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public taskProv: TaskProvider,

@@ -15,7 +15,7 @@
 
 <ion-content class="cards-bg">
     <ion-card>
-        <img src="assets/imgs/{{task.type}}.png"/>
+        <img src="{{icon}}{{task.type}}.png"/>
         <ion-card-content>
           <ion-card-title>
             {{task.title}}
@@ -50,35 +50,5 @@
             </ion-col>
           </ion-row>
       </ion-card>
-    <!--<ion-item>
-        <h2>{{task.title}}</h2>
-      </ion-item>
-      
-      <ion-item>
-        Start
-        <ion-note item-end>
-          {{task.start}}
-        </ion-note>
-      </ion-item>
-      <ion-item>
-        Completion
-        <ion-note item-end>
-          {{task.complete}}
-        </ion-note>
-      </ion-item>
-      <ion-item>
-        Type
-        <ion-note item-end>
-          {{task.type}}
-        </ion-note>
-      </ion-item>
-      <ion-item>
-        User
-        <ion-note item-end>
-          {{task.uid}}
-        </ion-note>
-      </ion-item>
-      <p padding>
-        {{ task.description }}
-      </p>-->
+  
 </ion-content>

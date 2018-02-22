@@ -10,6 +10,7 @@ import { TaskProvider } from '../../providers/task/task';
 })
 export class TaskDetailsPage {
   task: Task
+  icon : string = 'assets/img/';
   constructor(public navCtrl: NavController, public navParams: NavParams, private _task: TaskProvider, private toastCtrl: ToastController) {
     this.task = navParams.get('data');
   }

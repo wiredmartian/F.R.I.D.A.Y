@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AuthProvider } from '../../providers/auth/auth';
-import { ListPage } from '../list/list';
 import { TasksPage } from '../tasks/tasks';
-import { DatabaseProvider } from '../../providers/database/database';
-import { CreateTaskPage } from '../create-task/create-task';
 
 @IonicPage()
 @Component({
@@ -16,8 +13,7 @@ export class SigninPage {
   data = {} as User;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public auth: AuthProvider,
-    /*private db: DatabaseProvider*/) {
+    public auth: AuthProvider) {
       
   }
 

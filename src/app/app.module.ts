@@ -15,6 +15,7 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+//import 'firebase/firestore';
 import { SigninPage } from '../pages/signin/signin';
 import { TaskProvider } from '../providers/task/task';
 import { CreateTaskPage } from '../pages/create-task/create-task';
@@ -26,7 +27,25 @@ import { TaskDetailsPage } from '../pages/task-details/task-details';
 
 
 firebase.initializeApp(environment.firebase);
-
+/*
+firebase.firestore().enablePersistence()
+  .then(() => {
+      // Initialize Cloud Firestore through firebase
+      firebase.firestore();
+  }).catch((err) => {
+      if (err.code == 'failed-precondition') {
+          // Multiple tabs open, persistence can only be enabled
+          // in one tab at a a time.
+          // ...
+          console.log('failed precondition');
+      } else if (err.code == 'unimplemented') {
+          // The current browser does not support all of the
+          // features required to enable persistence
+          // ...
+          console.log('unimplemented');
+      }
+  });
+  */
 @NgModule({
   declarations: [
     MyApp,

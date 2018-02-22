@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 import { TaskProvider } from '../../providers/task/task';
 import { Task } from '../../models/task';
-import { TasksPage } from '../tasks/tasks';
 import { DatabaseProvider } from '../../providers/database/database';
 
 @IonicPage()
@@ -18,14 +17,13 @@ export class CreateTaskPage {
     public navParams: NavParams,
     private toastCtrl: ToastController,
     public taskProv: TaskProvider,
-    private dataProv: DatabaseProvider,
-    private modalCtrl: ModalController) {
+    private dataProv: DatabaseProvider) {
       this.dataProv.getDatabaseState().subscribe(rdy =>{
         if(rdy){
-          this.loadSQLiteTasks();
+          //this.loadSQLiteTasks();
         }
       },error =>{
-        this.toastMessage('ready state error');
+        //this.toastMessage('ready state error');
       })
   }
 
