@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import { TaskProvider } from '../../providers/task/task';
 import { Task } from '../../models/task';
 import { CreateTaskPage } from '../create-task/create-task';
 import { TaskDetailsPage } from '../task-details/task-details';
 import { SpeechProvider } from '../../providers/speech/speech';
-import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -15,20 +14,11 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class TasksPage {
   tasks: any[];
   icon: string = 'assets/img/';
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
+  constructor(
+    public navCtrl: NavController, 
     public taskProv: TaskProvider,
     private modalCtrl: ModalController,
-    private speech: SpeechProvider,
-    private auth: AuthProvider) {
-      this.auth.fireState()
-      .on('value', snap =>{
-        if(snap.val() === true){
-          this.speech.speakMessage("Welcome, Wired Martian");
-        } else {
-          this.speech.speakMessage("You're offline. Your list will sync when your connection is available");
-        }
-      })
+    private speech: SpeechProvider) {
   }
 
   ionViewDidLoad() {
@@ -39,9 +29,9 @@ export class TasksPage {
         console.log(snapshot.val());
       })*/
       //console.log(item);
-    },(err) =>{
-      console.log(err);
-    })
+    },() =>{
+      this.speech.speakMessage("Failed to fetch tasks. you're disconnected");
+    });
   }
 
   addTask(){

@@ -88,8 +88,8 @@ export class AuthProvider {
   toastMessage(message: string){
     this.toastCtrl.create({
       message: message,
-      duration: 5000,
-      position: "bottom"
+      duration: 3000,
+      position: "top"
     }).present();
   }
 }

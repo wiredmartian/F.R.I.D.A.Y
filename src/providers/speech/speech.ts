@@ -6,7 +6,7 @@ export class SpeechProvider {
   options: TTSOptions = {
     text: '',
     locale: 'en-US',
-    rate: 0.75
+    rate: 0.90
   };
   constructor(private tts: TextToSpeech) {
 
@@ -15,6 +15,10 @@ export class SpeechProvider {
   speakMessage(text: string){
     this.options.text = text;
     return this.tts.speak(this.options);
+  }
+
+  stopMessage(){
+    return this.tts.stop();
   }
 }
 
