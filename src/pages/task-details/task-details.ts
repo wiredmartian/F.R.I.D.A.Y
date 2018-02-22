@@ -12,8 +12,8 @@ import { SpeechProvider } from '../../providers/speech/speech';
 })
 export class TaskDetailsPage {
   task: Task
-  icon : string = 'assets/img/';
-  name: string = "play";
+  icon: string = 'assets/img/';
+  play_pause: string = "play";
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -36,18 +36,22 @@ export class TaskDetailsPage {
   }
 
   readTask(){
-    this.name = "pause";
     let descript = "You've logged a " + this.task.type + " item titled " + this.task.title 
     + " set to start " + this.task.start + " and be complete by " + this.task.complete
     + " ... description: " + this.task.description;
-    this.speech.speakMessage(descript.toString())
-    .then(() => {
-      console.log('done reading');
-    });
+    if(this.play_pause == "play"){
+      this.play_pause = "pause";
+      this.speech.speakMessage(descript.toString())
+      .then(() => {
+        console.log('done reading');
+      });
+    } else {
+      this.stopReading();
+    }
   }
 
   stopReading(){
-    this.name = "play";
+    this.play_pause = "play";
     this.speech.stopMessage().then(() =>{
       console.log('stopped');
     });
