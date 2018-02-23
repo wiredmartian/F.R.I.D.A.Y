@@ -26,7 +26,7 @@
           </ion-avatar>
           <h2>{{task.title}}</h2>
           <p>{{task.description}}</p>
-          <ion-note item-end>{{task.start}}</ion-note>
+          <ion-note item-end>{{task.start | amTimeAgo}}</ion-note>
         </button>
     </ion-list>
     <!--

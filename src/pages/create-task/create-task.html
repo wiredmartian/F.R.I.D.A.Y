@@ -22,12 +22,14 @@
   -->
     <ion-item>
       <ion-label stacked>When will you start?</ion-label>
-      <ion-input type="text" [(ngModel)]="task.start" name="start"></ion-input>
+      <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="task.start" name="start"></ion-datetime>
+      <!--<ion-input type="text" [(ngModel)]="task.start" name="start"></ion-input>-->
     </ion-item>
 
     <ion-item>
       <ion-label stacked>When do you plan to complete it?</ion-label>
-      <ion-input type="text" [(ngModel)]="task.complete" name="complete"></ion-input>
+      <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="task.complete" name="complete"></ion-datetime>
+      <!--<ion-input type="text" [(ngModel)]="task.complete" name="complete"></ion-input>-->
     </ion-item>
 
     <ion-item>

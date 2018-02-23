@@ -48,6 +48,7 @@ export class CreateTaskPage {
   addTask(){
     this.taskProv.createTask(this.task)
     .then(() =>{
+      this.feedback.toastMessage('task successfully saved');
       this.navCtrl.pop();
     }, () =>{
       this.auth.fireState()
