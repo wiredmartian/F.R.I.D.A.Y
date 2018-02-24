@@ -13,7 +13,8 @@ import { SpeechProvider } from '../../providers/speech/speech';
 export class TaskDetailsPage {
   task: Task
   icon: string = 'assets/img/';
-  play_pause: string = "play";
+  audiocontrol: string = "assets/img/play.png";
+  count: number = 0;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -37,21 +38,24 @@ export class TaskDetailsPage {
 
   readTask(){
     let descript = "You've logged a " + this.task.type + " item titled " + this.task.title 
-    + " set to start " + this.task.start + " and be complete by " + this.task.complete
-    + " ... description: " + this.task.description;
-    if(this.play_pause == "play"){
-      this.play_pause = "pause";
+    + ". This activity is set to start on " + this.task.start + ". And be completed on " + this.task.complete
+    + ". Description. " + this.task.description;
+    if(this.count == 0){ /** user just clicked play */
+      this.count = 1;
+      this.audiocontrol = "assets/img/pause.png";
       this.speech.speakMessage(descript.toString())
       .then(() => {
         console.log('done reading');
       });
-    } else {
+    } else{
       this.stopReading();
     }
+    
   }
 
   stopReading(){
-    this.play_pause = "play";
+    this.count = 0;
+    this.audiocontrol = "assets/img/play.png";
     this.speech.stopMessage().then(() =>{
       console.log('stopped');
     });

@@ -6,7 +6,10 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
+  <ion-navbar color="primary" no-border-bottom>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
     <ion-buttons end (click)="addTask()">
       <button ion-button icon-only>
         <ion-icon name="add"></ion-icon>
@@ -15,6 +18,19 @@
     <ion-title>ToDos</ion-title>
   </ion-navbar>
 
+  <ion-toolbar>
+      <ion-segment>
+        <ion-segment-button value="today">
+          Today
+        </ion-segment-button>
+        <ion-segment-button value="tomorrow">
+          Tomorrow
+        </ion-segment-button>
+        <ion-segment-button value="ducklings">
+          Soon
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
 

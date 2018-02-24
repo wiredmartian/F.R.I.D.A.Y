@@ -13,7 +13,7 @@ export class TaskProvider {
   constructor(public http: Http, 
     public auth: AuthProvider,
     public firedb: AngularFireDatabase) {
-    this.uid = auth.onGetUid();
+      this.uid = firebase.auth().currentUser.uid;
   }
 
   createTask(task: Task){
@@ -25,6 +25,7 @@ export class TaskProvider {
     .update(task);
   }
   getTasks(){
+    console.log(this.uid);
     return this.firedb.list(`/tasks/${this.uid}`).valueChanges();
   }
 

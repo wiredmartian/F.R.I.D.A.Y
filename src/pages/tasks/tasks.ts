@@ -30,7 +30,7 @@ export class TasksPage {
       })*/
       //console.log(item);
     },() =>{
-      this.speech.speakMessage("Failed to fetch tasks. you're disconnected");
+      this.speech.speakMessage("Failed to fetch tasks.");
     });
   }
 

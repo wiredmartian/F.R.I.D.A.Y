@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { User } from '../../models/user';
 import { SigninPage } from '../signin/signin';
 import { TasksPage } from '../tasks/tasks';
-import { SpeechProvider } from '../../providers/speech/speech';
 import { UserfeedbackProvider } from '../../providers/userfeedback/userfeedback';
 
 
@@ -18,8 +17,8 @@ export class SignupPage {
   constructor(
     public navCtrl: NavController, 
     public auth: AuthProvider,
-    private speech: SpeechProvider,
-    private feeback: UserfeedbackProvider) {
+    private feeback: UserfeedbackProvider,
+    private loadingCtrl: LoadingController) {
       
   }
 
@@ -27,13 +26,17 @@ export class SignupPage {
     if(!this.validateCredentials()){
       return;
     }
-    this.feeback.presentLoading();
+    let loading = this.loadingCtrl.create({
+      content: 'Loading...',
+      spinner: 'dots'
+    });
+    loading.present();
     this.auth.onSignUp(this.data)
     .then(() =>{
-        this.feeback.dismissLoading();
+        loading.dismiss();
         this.navCtrl.setRoot(TasksPage);
     }, () =>{
-      this.feeback.dismissLoading();
+      loading.dismiss();
       this.feeback.toastMessage('Registration failed. Check your inputs and try again');
     });
   }

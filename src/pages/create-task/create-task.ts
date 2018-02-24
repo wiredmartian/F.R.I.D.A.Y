@@ -55,7 +55,7 @@ export class CreateTaskPage {
       .on('value', snap =>{
         if(snap.val() === false){
           /** user is offline */
-          this.speech.speakMessage("your task has been saved. your data will sync once you're online")
+          this.speech.speakMessage("your task has been saved. your data will sync once you're online.")
           this.navCtrl.pop();
         }
       });

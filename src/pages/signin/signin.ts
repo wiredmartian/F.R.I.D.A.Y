@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AuthProvider } from '../../providers/auth/auth';
 import { TasksPage } from '../tasks/tasks';
@@ -16,16 +16,21 @@ export class SigninPage {
   constructor(
     private navCtrl: NavController, 
     private auth: AuthProvider,
-    private feedback: UserfeedbackProvider) {   
+    private feedback: UserfeedbackProvider,
+    private loadingCtrl: LoadingController) {   
   }
 
   signIn(){
-    this.feedback.presentLoading();
+    let loading = this.loadingCtrl.create({
+      content: 'Loading...',
+      spinner: 'dots'
+    });
+    loading.present();
     this.auth.onSignIn(this.data).then(res =>{
-        this.feedback.dismissLoading();
+        loading.dismiss()
         this.navCtrl.setRoot(TasksPage);
     },(err) =>{
-      this.feedback.dismissLoading();
+      loading.dismiss();
       this.feedback.toastMessage('Email or password incorrect.');
     });
   }
