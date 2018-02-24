@@ -17,18 +17,24 @@
   <ion-list>
 
     <ion-item>
-      <ion-label floating>Email</ion-label>
+      <ion-label stacked>Email</ion-label>
       <ion-input type="text" [(ngModel)]="data.email" name="email"></ion-input>
     </ion-item>
   
     <ion-item>
-      <ion-label floating>Password</ion-label>
+      <ion-label stacked>Password</ion-label>
       <ion-input type="password" [(ngModel)]="data.password" name="password"></ion-input>
     </ion-item>
   
   </ion-list>
-  
-  <div padding>
-    <button ion-button block (click)="signIn()">Sign In</button>
-  </div>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+            <button ion-button block (click)="signIn()">Login</button>
+          </ion-col>
+          <ion-col>
+              <button ion-button block (click)="viewRegister()">Register</button>
+            </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

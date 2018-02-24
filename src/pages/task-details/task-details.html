@@ -15,6 +15,11 @@
 
 <ion-content class="cards-bg">
     <ion-card>
+      <div align="center" *ngIf="task.isdone == true">
+          <button ion-button clear large color="danger" icon-start>
+              <ion-icon name='checkmark-circle-outline'></ion-icon>
+          </button>
+      </div>
         <img src="{{icon}}{{task.type}}.png"/>
         <ion-card-content>
           <ion-card-title>
@@ -24,26 +29,24 @@
             {{task.description}}
             <br><br>
 
-            You've logged a {{task.type }} item titled {{task.title}} set to start {{task.start | amLocale:'en' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}} and be 
+            You've logged a {{task.type }} item titled {{task.title}} with a {{task.priority}}. Set to start {{task.start | amLocale:'en' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}} and be 
             complete by {{task.complete | amLocale:'en' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}
           </p>
         </ion-card-content>
 
         <ion-row no-padding>
-          <div *ngIf="task.isdone">
-            <ion-col>
-              <button ion-button clear small color="danger" icon-start>
+            <ion-col *ngIf="!task.isdone">
+              <button ion-button clear small color="danger" icon-start (click)="taskComplete(task)">
                 <ion-icon name='checkmark-circle-outline'></ion-icon>
                 Done
               </button>
             </ion-col>
-            <ion-col text-center>
-              <button ion-button clear small color="danger" icon-start>
-                <ion-icon name='create' (click)="editTask(task)"></ion-icon>
+            <ion-col *ngIf="!task.isdone" text-center>
+              <button ion-button clear small color="danger" icon-start (click)="editTask(task)">
+                <ion-icon name='create'></ion-icon>
                 Edit
               </button>
             </ion-col>
-          </div>
             <ion-col text-right>
               <button ion-button clear small color="danger" icon-start (click)="deleteTask(task.taskid)">
                 <ion-icon name='close-circle'></ion-icon>

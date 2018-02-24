@@ -41,16 +41,9 @@
             <img src="{{icon}}{{task.type}}.png">
           </ion-avatar>
           <h2>{{task.title}}</h2>
-          <p>{{task.description}}</p>
+          <p>{{task.description}}</p>         
           <ion-note item-end>{{task.start | amTimeAgo}}</ion-note>
+          <!--<ng-template #taskComplete>Completed</ng-template>-->
         </button>
     </ion-list>
-    <!--
-  <ion-list>
-    <button ion-item *ngFor="let task of tasks" (click)="viewTask(task)">
-      <h2>{{ task.title }}</h2>
-      <p>{{ task.description }}</p>
-    </button>
-  </ion-list>
--->
 </ion-content>

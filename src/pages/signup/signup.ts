@@ -23,9 +23,7 @@ export class SignupPage {
   }
 
   signUp(){
-    if(!this.validateCredentials()){
-      return;
-    }
+
     let loading = this.loadingCtrl.create({
       content: 'Loading...',
       spinner: 'dots'
@@ -35,19 +33,13 @@ export class SignupPage {
     .then(() =>{
         loading.dismiss();
         this.navCtrl.setRoot(TasksPage);
-    }, () =>{
+    }, (err) =>{
       loading.dismiss();
-      this.feeback.toastMessage('Registration failed. Check your inputs and try again');
+      this.feeback.toastMessage(err.message);
     });
   }
 
   viewSignIn(){
     this.navCtrl.push(SigninPage);
-  }
-
-  validateCredentials(){
-    if(this.data.password == '' || this.data.email == ''){
-      return false;
-    }
   }
 }

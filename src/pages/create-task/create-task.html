@@ -9,7 +9,16 @@
       <ion-label stacked>Short task title?</ion-label>
       <ion-input type="text" [(ngModel)]="task.title" name="title"></ion-input>
     </ion-item>
-  
+
+    <ion-item>
+        <ion-label stacked>Task priority?</ion-label>
+        <ion-select [(ngModel)]="task.priority" name="priority">
+            <ion-option value="low">Low</ion-option>
+            <ion-option value="average">Average</ion-option>
+            <ion-option value="high">High</ion-option>
+          </ion-select>
+      </ion-item>
+      
     <ion-item>
       <ion-label stacked>What will you be doing?</ion-label>
       <ion-input [(ngModel)]="task.description" name="description"></ion-input>

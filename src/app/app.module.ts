@@ -27,6 +27,8 @@ import { SQLite } from '@ionic-native/sqlite';
 import { TaskDetailsPage } from '../pages/task-details/task-details';
 import { SpeechProvider } from '../providers/speech/speech';
 import { UserfeedbackProvider } from '../providers/userfeedback/userfeedback';
+import { EditTaskPage } from '../pages/edit-task/edit-task';
+import { SignupPage } from '../pages/signup/signup';
 
 
 firebase.initializeApp(environment.firebase);
@@ -55,9 +57,11 @@ firebase.firestore().enablePersistence()
     HomePage,
     ListPage,
     SigninPage,
+    SignupPage,
     CreateTaskPage,
     TasksPage,
-    TaskDetailsPage
+    TaskDetailsPage,
+    EditTaskPage
   ],
   imports: [
     BrowserModule,
@@ -75,9 +79,11 @@ firebase.firestore().enablePersistence()
     HomePage,
     ListPage,
     SigninPage,
+    SignupPage,
     CreateTaskPage,
     TasksPage,
-    TaskDetailsPage
+    TaskDetailsPage,
+    EditTaskPage
   ],
   providers: [
     StatusBar,

@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ListPage } from '../pages/list/list';
 import * as firebase from 'firebase';
 import { TasksPage } from '../pages/tasks/tasks';
-import { SignupPage } from '../pages/signup/signup';
+import { SigninPage } from '../pages/signin/signin';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { SignupPage } from '../pages/signup/signup';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = TasksPage;
+  rootPage: any = SigninPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -52,7 +52,7 @@ export class MyApp {
       if(user){
         this.nav.setRoot(TasksPage);
       } else {
-        this.nav.setRoot(SignupPage);
+        this.nav.setRoot(SigninPage);
       }
     })
   }

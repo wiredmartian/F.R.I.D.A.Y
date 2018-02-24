@@ -4,7 +4,6 @@ import { Task } from '../../models/task';
 import { AuthProvider } from '../auth/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
-import { DateTime } from 'ionic-angular';
 
 @Injectable()
 export class TaskProvider {
@@ -14,11 +13,7 @@ export class TaskProvider {
   constructor(public http: Http, 
     public auth: AuthProvider,
     public firedb: AngularFireDatabase) {
-      this.auth.Session.subscribe(res =>{
-        if(res){
-          this.uid = res.uid;
-        }
-      });
+      this.uid = this.auth.onGetUid();
   }
   createTask(task: Task){
     task.isdone = false;
@@ -27,8 +22,7 @@ export class TaskProvider {
     return this.ref.child(`/tasks/${this.uid}/${key}`)
     .update(task);
   }
-  getTasks(uid: any){
-    this.uid = uid;
+  getTasks(){
     return this.firedb.list(`/tasks/${this.uid}`).valueChanges();
   }
 

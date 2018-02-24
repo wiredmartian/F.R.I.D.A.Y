@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { AuthProvider } from '../../providers/auth/auth';
 import { TasksPage } from '../tasks/tasks';
 import { UserfeedbackProvider } from '../../providers/userfeedback/userfeedback';
+import { SignupPage } from '../signup/signup';
 
 @IonicPage()
 @Component({
@@ -29,9 +30,14 @@ export class SigninPage {
     this.auth.onSignIn(this.data).then(res =>{
         loading.dismiss()
         this.navCtrl.setRoot(TasksPage);
-    },(err) =>{
+    }).catch((err) =>{
       loading.dismiss();
-      this.feedback.toastMessage('Email or password incorrect.');
+      if(err.message){
+        this.feedback.toastMessage(err.message);
+      }
     });
+  }
+  viewRegister(){
+    this.navCtrl.push(SignupPage);
   }
 }

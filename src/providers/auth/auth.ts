@@ -3,12 +3,11 @@ import * as firebase from 'firebase';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthProvider {
 
-  constructor(public auth: AngularFireAuth, private toastCtrl: ToastController, private storage: Storage) {
+  constructor(public auth: AngularFireAuth, private toastCtrl: ToastController) {
     this.dbConnectionSate();
   }
 
@@ -16,9 +15,7 @@ export class AuthProvider {
     
     let promise = new Promise((resolve, reject) =>{
       firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-      .then((res) =>{
-        console.log(res);
-        this.setUserStorageDetails(res.Uid);
+      .then(() =>{
         resolve(true);
       }).catch((err) =>{
         reject(err);
@@ -29,10 +26,7 @@ export class AuthProvider {
   onSignIn(user: User) : Promise<any>{
     let promise = new Promise((resolve, reject) =>{
       firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-      .then((res) =>{
-        if(this.getUserStorageUid().length == 0){
-          this.setUserStorageDetails(res.Uid);
-        }
+      .then(() =>{
         resolve(true);
       }).catch((err) =>{
         reject(err);
@@ -94,23 +88,6 @@ export class AuthProvider {
   fireState(){
     return firebase.database().ref(".info/connected");
   }
-
-  setUserStorageDetails(Uid){
-      this.storage.set('userId', Uid);
-      this.storage.set('auth', true);
-  }
-  getUserStorageUid() : string{
-    this.storage.get('userId')
-      .then((val) =>{
-        if(val){
-          return val;
-        }
-      },() =>{
-        return null;
-      });
-      return null;
-  }
-
   toastMessage(message: string){
     this.toastCtrl.create({
       message: message,

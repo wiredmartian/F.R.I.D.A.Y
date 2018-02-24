@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Task } from '../../models/task';
 import { TaskProvider } from '../../providers/task/task';
 import { UserfeedbackProvider } from '../../providers/userfeedback/userfeedback';
@@ -21,7 +21,8 @@ export class TaskDetailsPage {
     public navParams: NavParams, 
     private _task: TaskProvider,
     private feedback: UserfeedbackProvider,
-    private speech: SpeechProvider) {
+    private speech: SpeechProvider,
+    private modalCtrl: ModalController) {
     this.task = navParams.get('data');
   }
 
@@ -38,7 +39,7 @@ export class TaskDetailsPage {
   }
 
   readTask(){
-    let descript = "You've logged a " + this.task.type + " item titled " + this.task.title 
+    let descript = "You've logged a " + this.task.type + " item titled " + this.task.title + " with a " + this.task.priority
     + ". This activity is set to start on " + this.task.start + ". And be completed on " + this.task.complete
     + ". Description. " + this.task.description;
     if(this.count == 0){ /** user just clicked play */
@@ -73,6 +74,7 @@ export class TaskDetailsPage {
   }
 
   editTask(task: Task){
-    this.navCtrl.push(EditTaskPage, { task: task});
+    this.modalCtrl.create(EditTaskPage, {task: task})
+    .present();
   }
 }
