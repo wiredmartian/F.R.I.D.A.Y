@@ -4,6 +4,7 @@ import { Task } from '../../models/task';
 import { TaskProvider } from '../../providers/task/task';
 import { UserfeedbackProvider } from '../../providers/userfeedback/userfeedback';
 import { SpeechProvider } from '../../providers/speech/speech';
+import { EditTaskPage } from '../edit-task/edit-task';
 
 @IonicPage()
 @Component({
@@ -59,5 +60,19 @@ export class TaskDetailsPage {
     this.speech.stopMessage().then(() =>{
       console.log('stopped');
     });
+  }
+
+  taskComplete(task: Task){
+    this._task.taskComplete(task)
+    .then(() =>{
+      this.speech.speakMessage('Task Completed!');
+      this.navCtrl.pop();
+    }, () =>{
+      this.navCtrl.pop();
+    });
+  }
+
+  editTask(task: Task){
+    this.navCtrl.push(EditTaskPage, { task: task});
   }
 }

@@ -3,11 +3,12 @@ import * as firebase from 'firebase';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthProvider {
 
-  constructor(public auth: AngularFireAuth, private toastCtrl: ToastController) {
+  constructor(public auth: AngularFireAuth, private toastCtrl: ToastController, private storage: Storage) {
     this.dbConnectionSate();
   }
 
@@ -15,7 +16,9 @@ export class AuthProvider {
     
     let promise = new Promise((resolve, reject) =>{
       firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-      .then(() =>{
+      .then((res) =>{
+        console.log(res);
+        this.setUserStorageDetails(res.Uid);
         resolve(true);
       }).catch((err) =>{
         reject(err);
@@ -26,7 +29,10 @@ export class AuthProvider {
   onSignIn(user: User) : Promise<any>{
     let promise = new Promise((resolve, reject) =>{
       firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-      .then(() =>{
+      .then((res) =>{
+        if(this.getUserStorageUid().length == 0){
+          this.setUserStorageDetails(res.Uid);
+        }
         resolve(true);
       }).catch((err) =>{
         reject(err);
@@ -67,7 +73,7 @@ export class AuthProvider {
       console.log(err);
     })
   }
-
+/** redundancy */
   dbConnectionSate(){
     let connectedRef = firebase.database().ref(".info/connected");
       connectedRef.on('value', snapshot =>{
@@ -81,8 +87,28 @@ export class AuthProvider {
       });
   }
 
+  get Session(){
+    return this.auth.authState;
+  }
+
   fireState(){
     return firebase.database().ref(".info/connected");
+  }
+
+  setUserStorageDetails(Uid){
+      this.storage.set('userId', Uid);
+      this.storage.set('auth', true);
+  }
+  getUserStorageUid() : string{
+    this.storage.get('userId')
+      .then((val) =>{
+        if(val){
+          return val;
+        }
+      },() =>{
+        return null;
+      });
+      return null;
   }
 
   toastMessage(message: string){

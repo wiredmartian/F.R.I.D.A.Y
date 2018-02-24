@@ -20,6 +20,7 @@ import { SigninPage } from '../pages/signin/signin';
 import { TaskProvider } from '../providers/task/task';
 import { CreateTaskPage } from '../pages/create-task/create-task';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { IonicStorageModule } from '@ionic/storage';
 import { TasksPage } from '../pages/tasks/tasks';
 import { DatabaseProvider } from '../providers/database/database';
 import { SQLite } from '@ionic-native/sqlite';
@@ -65,6 +66,7 @@ firebase.firestore().enablePersistence()
     AngularFireDatabaseModule,
     HttpModule,
     MomentModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

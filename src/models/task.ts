@@ -7,6 +7,8 @@ export interface Task{
     complete: any;
     isdone: boolean;
     type: string;
+    priority: string;
+    date_complete: any;
 }
 export interface Meeting{
     title: string;

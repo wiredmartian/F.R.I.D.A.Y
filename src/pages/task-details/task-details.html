@@ -30,6 +30,7 @@
         </ion-card-content>
 
         <ion-row no-padding>
+          <div *ngIf="task.isdone">
             <ion-col>
               <button ion-button clear small color="danger" icon-start>
                 <ion-icon name='checkmark-circle-outline'></ion-icon>
@@ -38,10 +39,11 @@
             </ion-col>
             <ion-col text-center>
               <button ion-button clear small color="danger" icon-start>
-                <ion-icon name='create'></ion-icon>
+                <ion-icon name='create' (click)="editTask(task)"></ion-icon>
                 Edit
               </button>
             </ion-col>
+          </div>
             <ion-col text-right>
               <button ion-button clear small color="danger" icon-start (click)="deleteTask(task.taskid)">
                 <ion-icon name='close-circle'></ion-icon>

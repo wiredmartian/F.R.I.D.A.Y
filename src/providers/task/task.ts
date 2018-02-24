@@ -4,28 +4,31 @@ import { Task } from '../../models/task';
 import { AuthProvider } from '../auth/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { DateTime } from 'ionic-angular';
 
 @Injectable()
 export class TaskProvider {
-  uid : string = '';
+  uid: string = '';
   ref : firebase.database.Reference = firebase.database().ref();
 
   constructor(public http: Http, 
     public auth: AuthProvider,
     public firedb: AngularFireDatabase) {
-      this.uid = firebase.auth().currentUser.uid;
+      this.auth.Session.subscribe(res =>{
+        if(res){
+          this.uid = res.uid;
+        }
+      });
   }
-
   createTask(task: Task){
-    let uid = this.auth.onGetUid();
     task.isdone = false;
-    let key = this.ref.child(`/tasks/${uid}`).push(task).key;
+    let key = this.ref.child(`/tasks/${this.uid}`).push(task).key;
     task.taskid = key;
-    return this.ref.child(`/tasks/${uid}/${key}`)
+    return this.ref.child(`/tasks/${this.uid}/${key}`)
     .update(task);
   }
-  getTasks(){
-    console.log(this.uid);
+  getTasks(uid: any){
+    this.uid = uid;
     return this.firedb.list(`/tasks/${this.uid}`).valueChanges();
   }
 
@@ -35,5 +38,16 @@ export class TaskProvider {
 
   getTaskById(taskId){
     return this.ref.child(`/tasks/${this.uid}/${taskId}`);
+  }
+
+  taskComplete(task: Task){
+    task.isdone = true;
+    task.date_complete = Date.now();
+    return this.getTaskById(task.taskid)
+    .set(task);
+  }
+
+  updateTask(task: Task){
+    return this.getTaskById(task.taskid).set(task);
   }
 }

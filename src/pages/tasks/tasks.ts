@@ -5,6 +5,7 @@ import { Task } from '../../models/task';
 import { CreateTaskPage } from '../create-task/create-task';
 import { TaskDetailsPage } from '../task-details/task-details';
 import { SpeechProvider } from '../../providers/speech/speech';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -18,20 +19,20 @@ export class TasksPage {
     public navCtrl: NavController, 
     public taskProv: TaskProvider,
     private modalCtrl: ModalController,
-    private speech: SpeechProvider) {
+    private speech: SpeechProvider,
+    private auth: AuthProvider) {
   }
 
-  ionViewDidLoad() {
-    this.taskProv.getTasks().subscribe(res =>{
-      this.tasks = res;
-      /*let item = this.taskProv.getTaskById('-L5eGb8yoXZoFeqQxR7r')
-      .once('value').then(snapshot =>{
-        console.log(snapshot.val());
-      })*/
-      //console.log(item);
-    },() =>{
-      this.speech.speakMessage("Failed to fetch tasks.");
-    });
+  ionViewDidEnter() {
+    this.auth.Session.subscribe(session =>{
+      if(session){
+        this.taskProv.getTasks(session.uid).subscribe(res =>{
+          this.tasks = res;
+        }, () =>{
+          this.speech.speakMessage("Failed to fetch tasks.");
+        });
+      }
+    }) 
   }
 
   addTask(){
