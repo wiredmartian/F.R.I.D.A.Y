@@ -29,6 +29,7 @@ import { SpeechProvider } from '../providers/speech/speech';
 import { UserfeedbackProvider } from '../providers/userfeedback/userfeedback';
 import { EditTaskPage } from '../pages/edit-task/edit-task';
 import { SignupPage } from '../pages/signup/signup';
+import { PopoverPage } from '../pages/popover/popover';
 
 
 firebase.initializeApp(environment.firebase);
@@ -61,7 +62,8 @@ firebase.firestore().enablePersistence()
     CreateTaskPage,
     TasksPage,
     TaskDetailsPage,
-    EditTaskPage
+    EditTaskPage,
+    PopoverPage
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,8 @@ firebase.firestore().enablePersistence()
     CreateTaskPage,
     TasksPage,
     TaskDetailsPage,
-    EditTaskPage
+    EditTaskPage,
+    PopoverPage
   ],
   providers: [
     StatusBar,
