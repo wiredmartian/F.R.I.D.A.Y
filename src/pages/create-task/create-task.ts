@@ -21,7 +21,7 @@ export class CreateTaskPage {
     private speech: SpeechProvider) {
   }
 
-  addTask(){
+  addTask(formTask){
     this.taskProv.createTask(this.task)
     .then(() =>{
       this.feedback.toastMessage('task successfully saved');
@@ -30,7 +30,6 @@ export class CreateTaskPage {
       this.auth.fireState()
       .on('value', snap =>{
         if(snap.val() === false){
-          /** user is offline */
           this.speech.speakMessage("your task has been saved. your data will sync once you're online.")
           this.navCtrl.pop();
         }

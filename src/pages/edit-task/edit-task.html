@@ -14,14 +14,15 @@
 
 
 <ion-content padding>
+  <form (ngSubmit)="updateTask(f.value)" #f="ngForm">
     <ion-item>
         <ion-label stacked>Short task title?</ion-label>
-        <ion-input type="text" [(ngModel)]="task.title" name="title"></ion-input>
+        <ion-input type="text" [(ngModel)]="task.title" name="title" required></ion-input>
       </ion-item>
       
       <ion-item>
         <ion-label stacked>Task priority?</ion-label>
-        <ion-select [(ngModel)]="task.priority" name="priority">
+        <ion-select [(ngModel)]="task.priority" name="priority" required>
             <ion-option value="low">Low</ion-option>
             <ion-option value="average">Average</ion-option>
             <ion-option value="high">High</ion-option>
@@ -30,24 +31,24 @@
 
       <ion-item>
         <ion-label stacked>What will you be doing?</ion-label>
-        <ion-input [(ngModel)]="task.description" name="description"></ion-input>
+        <ion-input [(ngModel)]="task.description" name="description" required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>When will you start?</ion-label>
-        <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="task.start" name="start"></ion-datetime>
+        <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="task.start" name="start" required></ion-datetime>
         <!--<ion-input type="text" [(ngModel)]="task.start" name="start"></ion-input>-->
       </ion-item>
   
       <ion-item>
         <ion-label stacked>When do you plan to complete it?</ion-label>
-        <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="task.complete" name="complete"></ion-datetime>
+        <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="task.complete" name="complete" required></ion-datetime>
         <!--<ion-input type="text" [(ngModel)]="task.complete" name="complete"></ion-input>-->
       </ion-item>
   
       <ion-item>
         <ion-label stacked>Nature of activity</ion-label>
-        <ion-select [(ngModel)]="task.type" name="type">
+        <ion-select [(ngModel)]="task.type" name="type" required>
           <ion-option value="coding">Coding</ion-option>
           <ion-option value="event">Event</ion-option>
           <ion-option value="entertainment">Entertainment</ion-option>
@@ -57,5 +58,6 @@
           <ion-option value="fun">Fun</ion-option>
         </ion-select>
     </ion-item>
-      <button ion-button full (click)="updateTask()">Save</button>
+      <button ion-button full type="submit" [disabled]="!f.valid">Save Changes</button>
+    </form>
 </ion-content>
