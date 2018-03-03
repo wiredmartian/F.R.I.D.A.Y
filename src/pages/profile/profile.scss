@@ -1,4 +1,18 @@
-page-profile img{
-    max-width: 150px;
-    border-radius: 50%;
+page-profile{
+    img.avatar {
+        max-width: 150px;
+        border-radius: 50%;
+    }
+    p {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    img.social-icon {
+        width: 18%;
+        padding: 0 5%;
+        margin-left: 7%;
+    }
+    a {
+        color: white;
+    }
 }

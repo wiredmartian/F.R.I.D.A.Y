@@ -17,6 +17,7 @@ export class ProfilePage {
     this.auth.getLoggedUser()
     .on('value', (userdata) =>{
       this.user = userdata.val();
+      console.log(this.user);
     });
   }
 

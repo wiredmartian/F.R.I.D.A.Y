@@ -17,12 +17,12 @@ export interface Profile {
     social?: SocialNetworks
 }
 
-interface Contact {
+export interface Contact {
     cellnumber: number;
     email: string;
 }
 
-interface SocialNetworks {
+export interface SocialNetworks {
     facebook: string;
     twitter: string;
     instagram: string;

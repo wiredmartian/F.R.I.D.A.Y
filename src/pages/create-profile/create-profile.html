@@ -32,31 +32,29 @@
         
       <ion-item>
         <ion-label stacked>Short Bio</ion-label>
-        <ion-input [(ngModel)]="user.about" name="about" required></ion-input>
+        <ion-textarea [(ngModel)]="user.about" name="about" required></ion-textarea>
       </ion-item>
-<!--
       <hr>
       <h3>Social</h3>
       <ion-item>
         <ion-label stacked>Facebook username</ion-label>
-        <ion-input [(ngModel)]="user.social.facebook" name="facebook"></ion-input>
+        <ion-input type="text" [(ngModel)]="social.facebook" name="facebook"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Twitter username</ion-label>
-        <ion-input [(ngModel)]="user.social.twitter" name="twitter"></ion-input>
+        <ion-input type="text" [(ngModel)]="social.twitter" name="twitter"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Instagram username</ion-label>
-        <ion-input [(ngModel)]="user.social.instagram" name="instagram"></ion-input>
+        <ion-input type="text" [(ngModel)]="social.instagram" name="instagram"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Blog/Website uri</ion-label>
-        <ion-input [(ngModel)]="user.social.website" name="website" required></ion-input>
+        <ion-input type="url" [(ngModel)]="social.website" name="website"></ion-input>
       </ion-item>
-    -->
       <button ion-button full type="submit" [disabled]="!f.valid">Save Changes</button>
     </form>
   </ion-content>

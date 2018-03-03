@@ -29,9 +29,25 @@
             <ion-icon name="pin" item-start></ion-icon>
               {{user.city}}
           </ion-item>
+        <ion-item>
+          <a target="_blank" href="http://facebook.com/{{user.social?.facebook}}">
+            <img src="assets/img/facebook.png" class="social-icon"/>
+          </a>
+          <a target="_blank" href="http://twitter.com/{{user.social?.twitter}}">
+            <img src="assets/img/twitter.png" class="social-icon"/>
+          </a>
+          <a target="_blank" href="http://twitter.com/{{user.social?.instagram}}">
+            <img src="assets/img/instagram.png" class="social-icon"/>
+          </a>
+          <a target="_blank" href="http://twitter.com/{{user.social?.website}}">
+            <img src="assets/img/rss.png" class="social-icon"/>
+          </a>
+          
+        </ion-item>
           <p>
             {{user.about}}
           </p>
       </ion-list>
   </div>
+  <button ion-button full (click)="presentEditUser()">Edit</button>
 </ion-content>
