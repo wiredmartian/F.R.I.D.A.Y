@@ -30,6 +30,8 @@ import { UserfeedbackProvider } from '../providers/userfeedback/userfeedback';
 import { EditTaskPage } from '../pages/edit-task/edit-task';
 import { SignupPage } from '../pages/signup/signup';
 import { PopoverPage } from '../pages/popover/popover';
+import { ProfilePage } from '../pages/profile/profile';
+import { CreateProfilePage } from '../pages/create-profile/create-profile';
 
 
 firebase.initializeApp(environment.firebase);
@@ -63,7 +65,9 @@ firebase.firestore().enablePersistence()
     TasksPage,
     TaskDetailsPage,
     EditTaskPage,
-    PopoverPage
+    PopoverPage,
+    ProfilePage,
+    CreateProfilePage
   ],
   imports: [
     BrowserModule,
@@ -86,7 +90,9 @@ firebase.firestore().enablePersistence()
     TasksPage,
     TaskDetailsPage,
     EditTaskPage,
-    PopoverPage
+    PopoverPage,
+    ProfilePage,
+    CreateProfilePage
   ],
   providers: [
     StatusBar,

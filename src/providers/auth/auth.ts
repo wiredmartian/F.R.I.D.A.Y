@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { User } from '../../models/user';
+import { User, Profile } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastController } from 'ionic-angular';
 
 @Injectable()
 export class AuthProvider {
-
   constructor(public auth: AngularFireAuth, private toastCtrl: ToastController) {
     this.dbConnectionSate();
   }
@@ -55,17 +54,14 @@ export class AuthProvider {
     return firebase.database().ref(`/users/${uid}`);
   }
 
-  updateUserProfile(newUser: User){
-    let currentUid = this.onGetUid();
-    let user = this.getUserByUid(currentUid);
-    user.set({
-      displayName: newUser.displayName,
-      about: newUser.about
-    }).then((res)=>{
-      console.log(res);
-    }).catch((err) =>{
-      console.log(err);
-    })
+  getLoggedUser(){
+    return firebase.database().ref(`/users/${firebase.auth().currentUser.uid}`);
+  }
+
+  updateUserProfile(profile: Profile){
+    let Uid =  this.onGetUid();
+    let user = this.getUserByUid(Uid);
+    return user.update(profile);
   }
 /** redundancy */
   dbConnectionSate(){

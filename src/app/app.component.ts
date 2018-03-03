@@ -7,6 +7,7 @@ import { ListPage } from '../pages/list/list';
 import * as firebase from 'firebase';
 import { TasksPage } from '../pages/tasks/tasks';
 import { SigninPage } from '../pages/signin/signin';
+import { ProfilePage } from '../pages/profile/profile';
 
 
 @Component({
@@ -22,8 +23,8 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
+      { title: 'Me', component: ProfilePage },
       { title: 'Tasks', component: TasksPage },
       { title: 'List', component: ListPage }
     ];
@@ -32,8 +33,6 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.hideSplashScreen();
       //this.splashScreen.hide();
@@ -42,8 +41,6 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 

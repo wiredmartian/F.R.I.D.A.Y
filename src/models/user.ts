@@ -1,8 +1,30 @@
 export interface User{
     password: any;
     email: string;
-    displayName: string;
     photoURL: string;
     about: string;
     Uid: any;
+}
+
+export interface Profile {
+    displayName: string;
+    fullname: string;
+    gender: string;
+    photoURL: string;
+    about: string;
+    city: string;
+    contact?: Contact,
+    social?: SocialNetworks
+}
+
+interface Contact {
+    cellnumber: number;
+    email: string;
+}
+
+interface SocialNetworks {
+    facebook: string;
+    twitter: string;
+    instagram: string;
+    website: string;
 }

@@ -1,18 +1,63 @@
-<!--
-  Generated template for the CreateProfilePage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Update User</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+  
+    <form (ngSubmit)="updateUser()" #f="ngForm">
+      <ion-item>
+        <ion-label stacked>Full name</ion-label>
+        <ion-input type="text" [(ngModel)]="user.fullname" name="fullname" required></ion-input>
+      </ion-item>
 
-  <ion-navbar>
-    <ion-title>create-profile</ion-title>
-  </ion-navbar>
+      <ion-item>
+          <ion-label stacked>Display name</ion-label>
+          <ion-input type="text" [(ngModel)]="user.displayName" name="displayName" required></ion-input>
+      </ion-item>
+  
+      <ion-item>
+          <ion-label stacked>Gender</ion-label>
+          <ion-select [(ngModel)]="user.gender" name="gender" required>
+              <ion-option value="female">Female</ion-option>
+              <ion-option value="male">Male</ion-option>
+            </ion-select>
+      </ion-item>
 
-</ion-header>
+      <ion-item>
+          <ion-label stacked>City</ion-label>
+          <ion-input type="text" [(ngModel)]="user.city" name="city" required></ion-input>
+        </ion-item>
+        
+      <ion-item>
+        <ion-label stacked>Short Bio</ion-label>
+        <ion-input [(ngModel)]="user.about" name="about" required></ion-input>
+      </ion-item>
+<!--
+      <hr>
+      <h3>Social</h3>
+      <ion-item>
+        <ion-label stacked>Facebook username</ion-label>
+        <ion-input [(ngModel)]="user.social.facebook" name="facebook"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label stacked>Twitter username</ion-label>
+        <ion-input [(ngModel)]="user.social.twitter" name="twitter"></ion-input>
+      </ion-item>
 
-<ion-content padding>
+      <ion-item>
+        <ion-label stacked>Instagram username</ion-label>
+        <ion-input [(ngModel)]="user.social.instagram" name="instagram"></ion-input>
+      </ion-item>
 
-</ion-content>
+      <ion-item>
+        <ion-label stacked>Blog/Website uri</ion-label>
+        <ion-input [(ngModel)]="user.social.website" name="website" required></ion-input>
+      </ion-item>
+    -->
+      <button ion-button full type="submit" [disabled]="!f.valid">Save Changes</button>
+    </form>
+  </ion-content>
+  

@@ -1,0 +1,37 @@
+
+<ion-header>
+
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div text-center *ngIf="user">
+    <img src="assets/img/coding.png" alt="avatar" />
+    <h2>{{user.displayName}}</h2>
+
+    <ion-list>
+        <ion-item>
+          <ion-icon name="person" item-start></ion-icon>
+            {{user.fullname}}
+        </ion-item>
+        <ion-item>
+            <ion-icon name="man" item-start></ion-icon>
+              {{user.gender}}
+          </ion-item>
+        <ion-item>
+            <ion-icon name="pin" item-start></ion-icon>
+              {{user.city}}
+          </ion-item>
+          <p>
+            {{user.about}}
+          </p>
+      </ion-list>
+  </div>
+</ion-content>
