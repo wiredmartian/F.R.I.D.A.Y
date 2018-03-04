@@ -32,6 +32,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { PopoverPage } from '../pages/popover/popover';
 import { ProfilePage } from '../pages/profile/profile';
 import { CreateProfilePage } from '../pages/create-profile/create-profile';
+import { PostProvider } from '../providers/post/post';
 
 
 firebase.initializeApp(environment.firebase);
@@ -104,7 +105,8 @@ firebase.firestore().enablePersistence()
     DatabaseProvider,
     TextToSpeech,
     SpeechProvider,
-    UserfeedbackProvider
+    UserfeedbackProvider,
+    PostProvider
   ]
 })
 export class AppModule {}
