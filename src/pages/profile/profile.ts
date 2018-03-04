@@ -3,6 +3,7 @@ import { IonicPage, ModalController } from 'ionic-angular';
 import { CreateProfilePage } from '../create-profile/create-profile';
 import { Profile } from '../../models/user';
 import { AuthProvider } from '../../providers/auth/auth';
+import { UploadProvider } from '../../providers/upload/upload';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -10,20 +11,28 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class ProfilePage {
   user = {} as Profile;
-  constructor(private modalCtrl: ModalController, private auth: AuthProvider) {
+  constructor(private modalCtrl: ModalController, private auth: AuthProvider, private upload: UploadProvider) {
   }
 
   ionViewDidEnter(){
     this.auth.getLoggedUser()
-    .on('value', (userdata) =>{
+    .once('value', (userdata) =>{
       this.user = userdata.val();
-      console.log(this.user);
     });
   }
 
   presentEditUser(){
     this.modalCtrl.create(CreateProfilePage)
     .present();
+  }
+
+  seletImage(){
+    this.upload.selectImage()
+    .then(() =>{
+
+    }).catch(() => {
+
+    })
   }
 
 

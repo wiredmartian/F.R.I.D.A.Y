@@ -1,11 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
@@ -33,6 +31,8 @@ import { PopoverPage } from '../pages/popover/popover';
 import { ProfilePage } from '../pages/profile/profile';
 import { CreateProfilePage } from '../pages/create-profile/create-profile';
 import { PostProvider } from '../providers/post/post';
+import { UploadProvider } from '../providers/upload/upload';
+import { Camera } from '@ionic-native/camera';
 
 
 firebase.initializeApp(environment.firebase);
@@ -106,7 +106,9 @@ firebase.firestore().enablePersistence()
     TextToSpeech,
     SpeechProvider,
     UserfeedbackProvider,
-    PostProvider
+    PostProvider,
+    UploadProvider,
+    Camera
   ]
 })
 export class AppModule {}

@@ -13,7 +13,9 @@
 
 <ion-content padding>
   <div text-center *ngIf="user">
-    <img src="assets/img/coding.png" class="avatar" alt="avatar" />
+    <img *ngIf="!user?.photoURL" src="assets/img/coding.png" class="avatar" alt="avatar" />
+    <img *ngIf="user?.photoURL" src="{{user.photoURL}}" class="avatar" alt="avatar" />
+    <ion-icon name="camera" class="camera" (click)="seletImage()"></ion-icon>
     <h2>{{user.displayName}}</h2>
 
     <ion-list>

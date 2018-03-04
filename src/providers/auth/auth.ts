@@ -68,10 +68,10 @@ export class AuthProvider {
     let connectedRef = firebase.database().ref(".info/connected");
       connectedRef.on('value', snapshot =>{
         if(snapshot.val() === true){
-          this.toastMessage('database online');
+          this.toastMessage('connected');
           return true;
         } else {
-          this.toastMessage('database offline');
+          this.toastMessage('no connection');
           return false;
         }
       });
@@ -88,7 +88,7 @@ export class AuthProvider {
     this.toastCtrl.create({
       message: message,
       duration: 3000,
-      position: "top"
+      position: "bottom"
     }).present();
   }
 }
