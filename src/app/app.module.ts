@@ -33,28 +33,13 @@ import { CreateProfilePage } from '../pages/create-profile/create-profile';
 import { PostProvider } from '../providers/post/post';
 import { UploadProvider } from '../providers/upload/upload';
 import { Camera } from '@ionic-native/camera';
+import { AddPostPage } from '../pages/add-post/add-post';
+import { PostDetailsPage } from '../pages/post-details/post-details';
+import { PostsPage } from '../pages/posts/posts';
 
 
 firebase.initializeApp(environment.firebase);
-/*
-firebase.firestore().enablePersistence()
-  .then(() => {
-      // Initialize Cloud Firestore through firebase
-      firebase.firestore();
-  }).catch((err) => {
-      if (err.code == 'failed-precondition') {
-          // Multiple tabs open, persistence can only be enabled
-          // in one tab at a a time.
-          // ...
-          console.log('failed precondition');
-      } else if (err.code == 'unimplemented') {
-          // The current browser does not support all of the
-          // features required to enable persistence
-          // ...
-          console.log('unimplemented');
-      }
-  });
-  */
+
 @NgModule({
   declarations: [
     MyApp,
@@ -68,7 +53,10 @@ firebase.firestore().enablePersistence()
     EditTaskPage,
     PopoverPage,
     ProfilePage,
-    CreateProfilePage
+    CreateProfilePage,
+    AddPostPage,
+    PostDetailsPage,
+    PostsPage
   ],
   imports: [
     BrowserModule,
@@ -93,7 +81,10 @@ firebase.firestore().enablePersistence()
     EditTaskPage,
     PopoverPage,
     ProfilePage,
-    CreateProfilePage
+    CreateProfilePage,
+    AddPostPage,
+    PostDetailsPage,
+    PostsPage
   ],
   providers: [
     StatusBar,
